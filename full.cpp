@@ -7,11 +7,12 @@
 #include <iomanip>
 #include <conio.h>
 #include <stdlib.h>
+#include <fstream>
 using namespace std;
 
 string s="-------------------------Welcome to TBD Electronics-------------------------\n\n";
 string s1="",s2="",s3="",s4="",s5="",st="",sf="",so="",swm="",sac="";
-int choose;
+int choose,choose1;
 double total=0, alltotal=0;
 int pt1=15,pt2=15,pt3=15,pf1=15,pf2=15,pf3=15,po1=15,po2=15,pw1=15,pw2=15,pa1=15,pa2=15,pa3=15;
 
@@ -21,7 +22,7 @@ class mainmenu
 public:
     int dispmm()
     {
-            cout<<s<<"what do you want to do?\n1. Sell Product\n2. Update Product\n3. total sales today\n4. search product\n";
+            cout<<s<<"what do you want to do?\n1. Sell Product\n2. Update Product\n3. total sales today\n4. search product\n5.Customer Management\n";
             cin>>choice;
             system("cls");
             cout<<s;
@@ -399,7 +400,8 @@ class customer
 {
     string name;
     string adress;
-    double contact;
+    int customerID;
+    int contact;
 public:
     void get_name(){cout<<"customer name: ";cin>>name;}
     void set_name(){cout<<"customer name: "<<name<<"\n";}
@@ -407,6 +409,79 @@ public:
     void set_adress(){cout<<"customer address: "<<adress<<"\n";}
     void get_contact(){cout<<"contact no.: ";cin>>contact;}
     void set_contact(){cout<<"contact no.: "<<contact<<"\n\n";}
+    void show_CustomerMenu()
+     {cout<<"1.Register New\n2.search Customer\n3.Delete All customers\n";}
+     int customerManagement(){
+         again:
+         ofstream file;
+         string line;
+         file.open("customerlist.txt",ios::app);
+         if(!file.is_open()){
+            cout<<"FIle problem,Rakib can handle";
+         }else{
+             cout<<"Enter phone no:\n";
+         cin>>line;
+         file<<line<<endl;
+         cout<<"Enter Name: \n";
+         cin>>line;
+         file<<line<<endl;
+         cout<<"Enter Adress: \n";
+         cin>>line;
+         file<<line<<endl;
+         cout<<"CUSTOMER ADDED SUCCESSFULLY!!\n";
+         file.close();
+         cout<<"1.Add more\n2.go Main Menu\n";
+         cin>>choose1;
+         if(choose1==1){
+           goto again;
+         }
+         else if(choose1==2){
+                return 1;
+
+         }
+
+         }
+
+     }
+    void search_customer(){
+         again:
+         bool found=false;
+     ifstream f;
+     string line;
+     string keyword;
+     f.open("customerlist.txt",ios::out);
+     if(!f.is_open()){
+        cout<<"file problem, call Rakib";
+
+     }else {
+         cout<<"Customer Phone Number:";
+        cin>>keyword;
+     while(!f.eof()){
+
+        getline(f,line);
+        if(line==keyword){
+            found=true;
+                  getline(f,line);
+                 cout<<"Customer Name :"<<line<<endl;
+                  getline(f,line);
+              cout<<"Customer Address :"<<line<<endl;
+              cout<<endl;
+
+              }}
+              if(found==false){
+                cout<<"NO DATA FOUND !!!";
+              };}
+
+
+              }
+              int again_search(){
+                again:
+               cout<<"1.Search again?\n2.Go to MainMenu\n";
+              cin>>choose;
+               if(choose==1){search_customer();
+                             goto again;}
+               else {return 1;}}
+
 };
 
 
@@ -437,11 +512,14 @@ int main()
         if(n==1)
             goto again;
         else
+            cout<<"Are you a register customer?\n1.Yes\n2.No\n";
+            cin>>choose1;
+            if(choose1==2){
             c.get_name();
             c.get_adress();
             c.get_contact();
-        system("cls");
-        cout<<s;
+            system("cls");
+            cout<<s;
         d.enter_date();
         system("cls");
         cout<<s<<endl;
@@ -450,6 +528,20 @@ int main()
         c.set_name();
         c.set_adress();
         c.set_contact();
+            }
+      else if(choose1==1){
+
+            system("cls");
+            cout<<s;
+        d.enter_date();
+        system("cls");
+        cout<<s<<endl;
+        i.disphead();
+        d.show_date();
+        c.search_customer();
+
+      }
+
         i.dispinv();
         alltotal+=total;
         cout<<"\n\ncreate another invoice?\n1.yes   2.no\n";
@@ -526,5 +618,28 @@ int main()
         else
             goto bgn;
     }
+
+
+
+    else if(n==5){
+            c.show_CustomerMenu();
+            cin>>choose;
+            if(choose==1){
+                    choose1=c.customerManagement();
+                    if(choose1==1){
+                            goto bgn;
+                         }
+}
+       else if (choose==2)
+    {
+      c.search_customer();
+      choose1=c.again_search();
+      if(choose1==1){goto bgn;}
+
+    }
+}
+
+
+
     return 0;
 }
