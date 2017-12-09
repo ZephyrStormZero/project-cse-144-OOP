@@ -213,7 +213,7 @@ public:
 
 class products
 {
-    double p1,p2,p3,p4,p5;
+    double p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
 public:
     void showtp()
     {
@@ -224,7 +224,7 @@ public:
     {
         if(a==1)
         {
-            st="TV                     ";
+
             cout<<"available products\n";
             cout<<" Brand                   Size                 Price   \n";
             cout<<"1. Sony                  52 inches            65000   \n";
@@ -234,6 +234,7 @@ public:
             system("cls");
             if(choose==1)
             {
+                st1="TV                     ";
                 s1="Sony                  52 inches            65000   \n";
                 p1=65000;
                 total+=p1;
@@ -241,22 +242,24 @@ public:
             }
             else if(choose==2)
             {
-                s1="LG                    42 inches            45000   \n";
-                p1=45000;
-                total+=p1;
+                st2="TV                     ";
+                s2="LG                    42 inches            45000   \n";
+                p2=45000;
+                total+=p2;
                 pt2-=1;
             }
             else if(choose==3)
             {
-                s1="Phillips              32 inches            30000   \n";
-                p1=30000;
-                total+=p1;
+                st3="TV                     ";
+                s3="Phillips              32 inches            30000   \n";
+                p3=30000;
+                total+=p3;
                 pt3-=1;
             }
         }
         else if(a==2)
         {
-            sf="Fridge                 ";
+
             cout<<"available products\n";
             cout<<" Brand                   Size                 Price   \n";
             cout<<"1. Samsung               360 Litre            45000   \n";
@@ -266,29 +269,32 @@ public:
             system("cls");
             if(choose==1)
             {
-                s2="Samsung               360 Litre            45000   \n";
-                p2=45000;
-                total+=p2;
+                sf1="Fridge                 ";
+                s4="Samsung               360 Litre            45000   \n";
+                p4=45000;
+                total+=p4;
                 pf1-=1;
             }
             else if(choose==2)
             {
-                s2="LG                    270 Litre            37000   \n";
-                p2=37000;
-                total+=p2;
+                sf2="Fridge                 ";
+                s5="LG                    270 Litre            37000   \n";
+                p5=37000;
+                total+=p5;
                 pf2-=1;
             }
             else if(choose==3)
             {
-                s2="Ariston               165 litre            28000   \n";
-                p2=28000;
-                total+=p2;
+                sf3="Fridge                 ";
+                s6="Ariston               165 litre            28000   \n";
+                p6=28000;
+                total+=p6;
                 pf3-=1;
             }
         }
         else if(a==3)
         {
-            so="Oven                    ";
+
             cout<<"available products\n";
             cout<<" Brand                   type                 Price   \n";
             cout<<"1. Samsung               microwave            25000   \n";
@@ -297,22 +303,24 @@ public:
             system("cls");
             if(choose==1)
             {
-                s3="Samsung               microwave            25000   \n";
-                p3=25000;
-                total+=p3;
+                so1="Oven                   ";
+                s7="Samsung               microwave            25000   \n";
+                p7=25000;
+                total+=p7;
                 po1-=1;
             }
             else if(choose==2)
             {
-                s3="Nova                  electric             15000   \n";
-                p3=15000;
-                total+=p3;
+                so2="Oven                   ";
+                s8="Nova                  electric             15000   \n";
+                p8=15000;
+                total+=p8;
                 po2-=1;
             }
         }
         else if(a==4)
         {
-            swm="Washing machine        ";
+
             cout<<"available products\n";
             cout<<" Brand                   Size                 Price   \n";
             cout<<"1. Whirlpool             180 Litre            50000   \n";
@@ -322,22 +330,24 @@ public:
             cout<<s;
             if(choose==1)
             {
-                s4="Whirlpool             180 Litre            50000   \n";
-                p4=50000;
-                total+=p4;
+                swm1="Washing machine        ";
+                s9="Whirlpool             180 Litre            50000   \n";
+                p9=50000;
+                total+=p9;
                 pw1-=1;
             }
             else if(choose==2)
             {
-                s4="LG                    120 Litre            35000   \n";
-                p4=35000;
-                total+=p4;
+                swm2="Washing machine        ";
+                s10="LG                    120 Litre            35000   \n";
+                p10=35000;
+                total+=p10;
                 pw2-=1;
             }
         }
         else if(a==5)
         {
-            sac="Air Conditioner        ";
+
             cout<<"available products\n";
             cout<<" Brand                   Size                 Price   \n";
             cout<<"1. gree                  1.5 ton              45000   \n";
@@ -347,31 +357,35 @@ public:
             system("cls");
             if(choose==1)
             {
-                s5="gree                  1.5 ton              45000   \n";
-                p5=45000;
-                total+=p5;
+                sac1="Air Conditioner        ";
+                s11="gree                  1.5 ton              45000   \n";
+                p11=45000;
+                total+=p11;
                 pa1-=1;
             }
             else if(choose==2)
             {
-                s5="hayes                 2 ton                65000   \n";
-                p5=65000;
-                total+=p5;
+                sac2="Air Conditioner        ";
+                s12="hayes                 2 ton                65000   \n";
+                p12=65000;
+                total+=p12;
                 pa2-=1;
             }
             else if(choose==3)
             {
-                s5="singer                1 ton                35000   \n";
-                p5=35000;
-                total+=p5;
+                sac3="Air Conditioner        ";
+                s13="singer                1 ton                35000   \n";
+                p13=35000;
+                total+=p13;
                 pa3-=1;
             }
         }
         else
             cout<<"insert correct number";
     }
-    void showproduct(){cout<<st<<s1<<sf<<s2<<so<<s3<<swm<<s4<<sac<<s5;}
+    void showproduct(){cout<<st1<<s1<<st2<<s2<<st3<<s3<<sf1<<s4<<sf2<<s5<<sf3<<s6<<so1<<s7<<so2<<s8<<swm1<<s9<<swm2<<s10<<sac1<<s11<<sac2<<s12<<sac3<<s13;}
 };
+
 
 class date
 {
@@ -402,7 +416,7 @@ class invoice:public products
          else{haveToPay=total;}
 
         cout<<"\n\n******************************THANK YOU**************************************";
-        s1="";s2="";s3="";s4="";s5="";st="";sf="";so="";swm="";sac="";
+        s1="";s2="";s3="";s4="";s5="";s6="";s7="";s8="";s9="";s10="";s11="";s12="";s13="";st1="";st2="";st3="";sf1="";sf2="";sf3="";so1="";so2="";swm1="";swm2="";sac1="";sac2="";sac3="";
     }
 };
 
