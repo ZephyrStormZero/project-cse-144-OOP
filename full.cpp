@@ -8,12 +8,14 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <fstream>
+#include<ctime>
 using namespace std;
 
-string s="-------------------------Welcome to TBD Electronics-------------------------\n\n";
+string s="-------------------------Welcome to CSE_16 Electronics-------------------------\n\n";
 string s1="",s2="",s3="",s4="",s5="",st="",sf="",so="",swm="",sac="";
 int choose,choose1;
-double total=0, alltotal=0;
+bool regularCustomer=false;
+double total=0, alltotal=0,haveToPay=0;
 int pt1=15,pt2=15,pt3=15,pf1=15,pf2=15,pf3=15,po1=15,po2=15,pw1=15,pw2=15,pa1=15,pa2=15,pa3=15;
 
 class mainmenu
@@ -373,12 +375,16 @@ public:
 
 class date
 {
+
   int date;
   int month;
   int year;
  public:
-  void enter_date(){cout<<"enter date:\ndd mm yyyy\n";cin>>date>>month>>year;};
-  void show_date(){cout<<"date:";cout<<date<<"/"<<month<<"/"<<year<<endl;};
+
+
+  void show_date(){time_t now = time(0);
+   char* dt = ctime(&now);
+   cout<<dt<<endl;};
 };
 
 class invoice:public products
@@ -391,6 +397,10 @@ class invoice:public products
         cout<<"product type            Brand               type/size              price       \n";
         showproduct();
         cout<<"\nTOTAL PRICE="<<total;
+        if(regularCustomer==true){haveToPay=(total-(total*2)/100);
+                                   cout<<"\nHave to pay: "<<haveToPay;}
+         else{haveToPay=total;}
+
         cout<<"\n\n******************************THANK YOU**************************************";
         s1="";s2="";s3="";s4="";s5="";st="";sf="";so="";swm="";sac="";
     }
@@ -446,12 +456,12 @@ public:
     void search_customer(){
          again:
          bool found=false;
-     ifstream f;
+     fstream f;
      string line;
      string keyword;
-     f.open("customerlist.txt",ios::out);
+     f.open("customerlist.txt",ios::in);
      if(!f.is_open()){
-        cout<<"file problem, call Rakib";
+        cout<<"No customer file found.Register first\n";
 
      }else {
          cout<<"Customer Phone Number:";
@@ -469,7 +479,7 @@ public:
 
               }}
               if(found==false){
-                cout<<"NO DATA FOUND !!!";
+                cout<<"NO DATA FOUND !!!\n";
               };}
 
 
@@ -479,8 +489,17 @@ public:
                cout<<"1.Search again?\n2.Go to MainMenu\n";
               cin>>choose;
                if(choose==1){search_customer();
-                             goto again;}
-               else {return 1;}}
+                              system("cls");
+                             goto again;
+                             }
+               else {system("cls");
+                      return 1;}}
+    int delete_customer(){
+    const int result = remove("customerlist.txt");
+
+    cout<<"successfully delelted file all entry!!!"<<endl;
+    return 1;
+    }
 
 };
 
@@ -520,7 +539,7 @@ int main()
             c.get_contact();
             system("cls");
             cout<<s;
-        d.enter_date();
+
         system("cls");
         cout<<s<<endl;
         i.disphead();
@@ -528,12 +547,13 @@ int main()
         c.set_name();
         c.set_adress();
         c.set_contact();
-            }
+        }
       else if(choose1==1){
 
             system("cls");
             cout<<s;
-        d.enter_date();
+            regularCustomer=true;
+
         system("cls");
         cout<<s<<endl;
         i.disphead();
@@ -592,10 +612,7 @@ int main()
                 goto upbgn2;
             else
                 goto bgn;
-        }
-
-
-    }
+        }}
     else if(n==3)
     {
         char a[2]="";
@@ -607,8 +624,7 @@ int main()
             goto bgn;
     }
     else if(n==4)
-    {
-        sebgn:
+    {  sebgn:
         sp.searc();
         cout<<"\nwant to search anything else?\n1.yes  2.no\n";
         cin>>choose;
@@ -616,12 +632,8 @@ int main()
         if(choose==1)
             goto sebgn;
         else
-            goto bgn;
-    }
-
-
-
-    else if(n==5){
+            goto bgn;}
+  else if(n==5){
             c.show_CustomerMenu();
             cin>>choose;
             if(choose==1){
@@ -637,9 +649,11 @@ int main()
       if(choose1==1){goto bgn;}
 
     }
+    else if(choose==3){
+        choose1=c.delete_customer();
+        goto bgn;
+    }
 }
 
-
-
-    return 0;
+ return 0;
 }
