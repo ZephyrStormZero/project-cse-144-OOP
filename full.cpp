@@ -12,7 +12,7 @@
 using namespace std;
 
 string s="-------------------------Welcome to CSE_16 Electronics-------------------------\n\n";
-string s1="",s2="",s3="",s4="",s5="",st="",sf="",so="",swm="",sac="";
+string s1="",s2="",s3="",s4="",s5="",s6="",s7="",s8="",s9="",s10="",s11="",s12="",s13="",st1="",st2="",st3="",sf1="",sf2="",sf3="",so1="",so2="",swm1="",swm2="",sac1="",sac2="",sac3="";
 int choose,choose1;
 bool regularCustomer=false;
 double total=0, alltotal=0,haveToPay=0;
