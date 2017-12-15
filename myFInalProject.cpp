@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <conio.h>
 #include <stdlib.h>
+#include<stdio.h>
 #include <fstream>
 #include<ctime>
 #include<windows.h>
@@ -28,12 +29,13 @@ double totalPrice=0,haveTopay=0;
 string ret_sellsName();
 string sellsmanName;
 
-string s="----------------Welcome to CSE_16 Electronics------------------\n\n";
+string s="---------------Welcome to CSE_16 Electronics----------------\n\n";
 string s1=" \n    Brand----|----type/size-----|----- price------quantity \n\n";
 string date;
 int ret_day();
 int ret_month();
 int password();
+void SetColor(int n);
 void gotoxy(int x,int y);
 void drawRectangle();
 int password();
@@ -151,7 +153,7 @@ void product::showSellsManWise(int n)
     file.read((char *)this,sizeof(*this));
     while(!file.eof()){
             sellsmanPrice+=price;
-        cout<<brand<<setw(10)<<sizeOrType<<setw(10)<<price<<endl;
+        cout<<type<<setw(10)<<brand<<setw(10)<<sizeOrType<<setw(10)<<price<<endl;
         file.read((char *)this,sizeof(*this));
 
     }
@@ -261,7 +263,17 @@ void product::getInvoiceProduct()
 void product::showtp()
     {
 
-        cout<<"1. TV\n2. Fridge\n3. Oven\n4. Washing Machine\n5. Air Conditioner\n6.Back"<<endl;
+        cout<<"1. Tv";
+        gotoxy(8,12);
+        cout<<"2. Fridge";
+        gotoxy(8,13);
+        cout<<"3. Oven";
+        gotoxy(8,14);
+        cout<<"4. Washing Machine";
+        gotoxy(8,15);
+        cout<<"5. Air Conditioner\n";
+
+
     }
 
 
@@ -672,18 +684,32 @@ public:
 
 };
 int MainMenu::dispmm()
-{           cout<<s<<"\n\n      what do you want to do?\n\n      1. Sell Product\n      2. Update Product\n      3. Search Date wise sells\n      4. Show all products\n      5. Customer Management\n      7. Authority\n\n";
-            cin>>choice;
-            system("cls");
-            cout<<s;
-            return choice;
+{             gotoxy(8,8);
+             cout<<"what do you want to do?";
+             gotoxy(8,11);
+             cout<<"01. Sell Product";
+             gotoxy(8,12);
+             cout<<"02. Update Product";
+             gotoxy(8,13);
+             cout<<"03. Search Date wise sells";
+             gotoxy(8,14);
+             cout<<"04. Show all products";
+             gotoxy(8,15);
+             cout<<"05. Customer Management";
+             gotoxy(8,16);
+             cout<<"06. Sellsman Sells";
+             gotoxy(8,17);
+             cin>>choice;
+             system("cls");
+
+             return choice;
 }
 int main()
-{   password();
+{   //password();
     system("cls");
-    gotoxy(45,2);
+
     sellsmanName=ret_sellsName();
-    cout<<"sells Man:"<<ret_sellsName()<<endl;
+
     system("color FC");
     product p;
     MainMenu m;
@@ -692,17 +718,21 @@ int main()
     invoice i;
     gotoxy(30,1);
     i.ret_date();
-    drawRectangle();
+
     mmenu:
-        gotoxy(4,4);
+    gotoxy(50,7);
+    cout<<"sells Man: MR, "<<ret_sellsName()<<endl;
+    drawRectangle();
     choice=m.dispmm();
 
     switch(choice){
 case 1:
     mainmenu:
+    drawRectangle();
+    gotoxy(8,11);
     p.showtp();
     cin>>choice2;
-    system("cls");
+
     cout<<s1;
     choice3=p.show_ALLproducts(choice2);
     if(choice3==1){goto mainmenu;}
@@ -867,6 +897,15 @@ int ret_month()
 }
 void drawRectangle(){
     int i, j;
+    gotoxy(20,2);
+             cout<<"---WELCOME TO CSE_16 ELECTRONICS---";
+             gotoxy(16,3);
+
+             cout<<"CHITTAGONG UNIVERSITY OF ENGINEERING & TECHNOLOGY";
+             gotoxy(16,5);
+             SetColor(35);
+             cout<<"Developed by :RIMON,RAKIB,ALVI,ARIF ";
+
     gotoxy(0,0);
     printf("%c",201);
     for(i = 1; i < 78; i++){
@@ -875,18 +914,22 @@ void drawRectangle(){
     }
     gotoxy(78,0);
     printf("%c",187);
-    for(i = 1; i < 25; i++){
+    for(i = 1; i <=22; i++){
         gotoxy(78, i);
-        if(i == 6){
+        if(i==5){}
+        else if(i == 6){
             printf("%c",185);
-        }else{
+        }
+        if(i==22)
+            printf("%c",188);
+        else{
             printf("%c",186);
         }
     }
 
-    gotoxy(0,25);
+    gotoxy(0,22);
     printf("%c",200);
-    for(i = 20; i > 0; i--){
+    for(i = 21; i > 0; i--){
         gotoxy(0,i);
         if(i == 6){
             printf("%c",204);
@@ -897,17 +940,13 @@ void drawRectangle(){
 
     for(i = 1; i < 78; i++){
         gotoxy(i,6);
-        if(i == 35){
-            printf("%c",203);
-        }else{
-            printf("%c",205);
+        printf("%c",205);
         }
-    }
 
-    for(i = 7; i < 5; i++){
-        gotoxy(35,i);
-        printf("%c",186);
-    }
+  for(i=1;i<78;i++){
+     gotoxy(i,22);
+    printf("%c",205);
+  }
 
 } int password()
  {   agn:
@@ -966,6 +1005,17 @@ string ret_sellsName(){
     return "ALVI";
  else
     return "ARIF";
+}
+void SetColor(int n)
+{    WORD wColor;
+     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+     CONSOLE_SCREEN_BUFFER_INFO csbi;
+   if(GetConsoleScreenBufferInfo(hStdOut, &csbi))
+     {
+          wColor = (csbi.wAttributes & 0xF0) + (n& 0x0F);
+          SetConsoleTextAttribute(hStdOut, wColor);
+     }
+     return;
 }
 
 
